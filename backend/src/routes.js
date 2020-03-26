@@ -10,8 +10,8 @@ router.post('/profile/login', controllers.Profile.login)
 router.get('/ongs', controllers.Ongs.listar)
 router.post('/ongs', controllers.Ongs.criar)
 
-router.get('/incidents', controllers.Incidents.listar)
-router.post('/incidents', controllers.Incidents.criar)
-router.delete('/incidents/:id', controllers.Incidents.deletar)
+router.get('/campanhas', controllers.Campanhas.listar)
+router.post('/campanhas', controllers.Campanhas.criar)
+router.delete('/campanhas/:id', controllers.Campanhas.deletar)
 
 module.exports = router;

@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs')
 const connection = require('../database/connection')
 
 const table_name_ongs = 'ongs'
-const table_name_incidents = 'incidents'
+const table_name_campanhas = 'campanhas'
 
 module.exports = {
 
@@ -16,17 +16,18 @@ module.exports = {
         }
         return res.json(arrayOngs)
     },
-
     async criar(req, res) {
         var { name, email, password, whatsapp, city, uf } = req.body
 
         password = await bcrypt.hash(password, 10);
         const id = crypto.randomBytes(4).toString('HEX')
-
+        
         await connection(table_name_ongs).insert({
             id, name, email, password, whatsapp, city, uf
         })
 
-        return res.json({ "Status": true, "Key": id })
+        console.log("ONG "+ name +" criada com sucesso")
+
+        return res.json({ "status": true, "id": id })
     }
 }

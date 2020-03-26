@@ -1,4 +1,4 @@
-const table_name = 'incidents'
+const table_name = 'campanhas'
 
 exports.up = function (knex) {
     return knex.schema.createTable(table_name, function (table) {
