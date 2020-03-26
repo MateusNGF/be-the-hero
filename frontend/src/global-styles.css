@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css?family=Exo:300,400,500,600&display=swap');
+* {
+    padding: 0px;
+    margin: 0px;
+    outline: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    font: 400 14px Exo, sans-serif;
+    background: #f0f0f5;
+    -webkit-font-smoothing: antialiased;
+}
+
+input, button, textarea {
+    font: 300 18px Exo, sans-serif;
+}
+
+button {
+    cursor: pointer;
+}
+
+form input {
+    width: 100%;
+    height: 60px;
+    color: #333;
+    border: 1px solid #dcdce6;
+    border-radius: 8px;
+    padding: 0 24px;
+}
+
+form textarea {
+    width: 100%;
+    height: 100px;
+    resize: vertical;
+    max-lines: 10;
+    max-height: 150px;
+    color: #333;
+    border: 1px solid #dcdce6;
+    border-radius: 8px;
+    padding: 24px 24px;
+    line-height: 20px;
+}
+
+
+.button {
+    width: 100%;
+    height: 60px;
+    background: #e02041;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 700;
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 60px;
+    transition: 0.5s;
+    box-shadow: 5px 7px 10px #b3b3b3;
+}
+
+.button:hover {
+    border-radius: 20px;
+    box-shadow: 5px 7px 7px #929292;
+}
+
+.btns-group {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+.btn-1 {
+    width: 60%;
+    height: 60px;
+    margin: 16px 10px 0px 0px;
+    background: white;
+    color: #e02041;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    transition: 0.5s;
+    box-shadow: 5px 7px 10px #b3b3b3;
+}
+
+.btn-1:hover {
+    border-radius: 20px;
+    box-shadow: 5px 7px 7px #929292;
+}
+
+.btn-2 {
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-top: 0px;
+    font-size: 14px;
+    height: 54px;
+    box-shadow: 5px 7px 10px #d3d3d3;
+}
+
+.link-back {
+    width: auto;
+    ;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    color: #41414d;
+    text-decoration: none;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: opacity 0.2s;
+}
+
+.link-back svg {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.link-back:hover {
+    opacity: 0.8;
+}
+
+.link-button {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    border: 1px solid #dcdce6;
+    background: transparent;
+    margin-left: 20px;
+    transition: 0.2s;
+}
+
+.link-button:hover {
+    border: 1px solid gray;
+}
+
+.listagem .cabecalho {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    margin-top: 40px;
+    text-transform: lowercase;
+}
+
+
+
+.listagem-casos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 24px;
+    list-style: none;
+}
+
+.listagem-casos .cards-casos {
+    background: #fff;
+    padding: 20px;
+    position: relative;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(1, 2fr);
+    grid-gap: 10px;
+}
+
+.listagem-casos .cards-casos strong {
+    display: block;
+    color: #41414d;
+}
+.listagem-casos .cards-casos p {
+    display: block;
+    margin-left: 10px;
+}
+.listagem-casos .cards-casos button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 14px;
+    top: 14px;
+    background: transparent;
+    border-radius: 20%;
+    padding: 5px;
+    border: none;
+    transition: 0.2s;
+}
+
+.listagem-casos .cards-casos button:hover {
+    transform: scale(1.2);
+}
+
+
+.listagem-vazia {
+    width: 100%;
+    padding: 20px;
+    margin-top: 40px;
+    background: #e02041;
+    color: white;
+    display: flex;
+    box-shadow: 20px 40px 15px rgba(184, 184, 184, 0.933);
+    justify-content: center;
+}
+
+.listagem-vazia h1 {
+    font-size: 15px;
+
+}
+
