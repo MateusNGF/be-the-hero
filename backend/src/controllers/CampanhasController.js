@@ -9,7 +9,7 @@ module.exports = {
 
         const [count] = await connection(table_name_campanhas).count()
 
-        res.header('X-Total-Count', count['count(*)'])
+        res.header('TotalCountItems', count['count(*)'])
 
         return res.json(await connection(table_name_campanhas)
             .join(table_name_ongs, 'ongs.id', '=', 'campanhas.ong_id')
@@ -29,13 +29,18 @@ module.exports = {
 
         const findOng = await connection(table_name_ongs).where('id', ong_id).first()
 
-        if (!findOng) return res.json({ error: "Authorization invalid" })
+        if (!findOng) {
+            return res.json({
+                status: false,
+                error: "Authorização invalida"
+            })
+        }
 
         const [id] = await connection(table_name_campanhas).insert({
             title, description, value, ong_id
         })
 
-        console.log("Campanha "+title+" criada por " +findOng.name+" com sucesso.")
+        console.log("Campanha " + title + " criada por " + findOng.name + " com sucesso.")
         return res.json({ "status": true, "post_id": id })
     },
 
@@ -43,18 +48,31 @@ module.exports = {
         const { id } = req.params;
         const ong_id = req.headers.authorization;
 
-        const incident = await connection(table_name_campanhas)
-            .where('id', id).select('ong_id').first();
-        if (incident != undefined) {
-            if (incident.ong_id != ong_id) {
-                return res.status(401).send({ error: "Operation rejected" })
+        const rsp_campanha = await connection(table_name_campanhas)
+            .where('id', id).select('*').first();
+
+        if (rsp_campanha != undefined) {
+            if (rsp_campanha.ong_id != ong_id) {
+                return res.json({
+                    status: false,
+                    error: "Permissão negada"
+                })
             } else {
-                const rsp = await connection(table_name_campanhas).where('id', id).delete()
-                console.log("Campanha "+ rsp.name +" deletado por "+ ong_id+" com sucesso")
-                return res.status(204).send()
+
+                await connection(table_name_campanhas)
+                    .where('id', id)
+                    .delete()
+                    
+                console.log(`ONG ${ong_id} deletou a campanha : ${rsp_campanha.title}. Data : ${new Date().toDateString()}`)
+                return res.json({
+                    status: true
+                })
             }
         } else {
-            return res.status(404).send({ error: "Incident not found" })
+            return res.json({
+                status: false,
+                error: "Camapanha não encontrada"
+            })
         }
 
     }

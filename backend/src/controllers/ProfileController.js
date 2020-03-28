@@ -16,28 +16,40 @@ module.exports = {
 
     async login(req, res) {
         const { password, ong_id } = req.body;
+        console.log(password, ong_id)
 
         if (ong_id != '') {
+            if (password != ''){
+                const profile = await connection(table_name_ongs).where('id', ong_id).first()
 
-            const profile = await connection(table_name_ongs).where('id', ong_id).first()
-
-            if (!profile) {
-                return res.json({
-                    error: "ONG not found with ID"
-                })
-            } else {
-                if (await bcrypt.compare(password, profile.password)) {
-                    return res.json({ name: profile.name })
-                } else {
+                if (!profile) {
                     return res.json({
-                        error: "Password invalid"
+                        status : false,
+                        error: "Nenhuma ONG encontrada"
                     })
+                } else {
+                    if (await bcrypt.compare(password, profile.password)) {
+                        return res.json({ 
+                            status  : true, 
+                            ong_name: profile.name 
+                        })
+                    } else {
+                        return res.json({
+                            status : false,
+                            error: "Senha invalida"
+                        })
+                    }
                 }
+            }else {
+                return res.json({
+                    status : false,
+                    error: "Precisa passars a senha"
+                })
             }
-
         } else {
             return res.json({
-                error: "Requered a ID"
+                status : false,
+                error: "Precisa passar seu ID"
             })
         }
     }

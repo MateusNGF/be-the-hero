@@ -4,8 +4,8 @@ const controllers = require('./controllers/controllers.js');
 
 const router = express.Router()
 
-router.get('/profile', controllers.Profile.listar)
-router.post('/profile/login', controllers.Profile.login)
+router.get('/perfil', controllers.Profile.listar)
+router.post('/perfil/login', controllers.Profile.login)
 
 router.get('/ongs', controllers.Ongs.listar)
 router.post('/ongs', controllers.Ongs.criar)

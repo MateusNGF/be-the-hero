@@ -21,13 +21,20 @@ module.exports = {
 
         password = await bcrypt.hash(password, 10);
         const id = crypto.randomBytes(4).toString('HEX')
-        
-        await connection(table_name_ongs).insert({
+
+        connection(table_name_ongs).insert({
             id, name, email, password, whatsapp, city, uf
+        }).then(rsp => {
+            console.log("ONG " + name + " criada com sucesso")
+            return res.json({ "status": true, "id": id })
+        }).catch(err => {
+            console.log(err)
+            return res.json({
+                status: false,
+                error: "Erro ao inserir"
+            })
         })
 
-        console.log("ONG "+ name +" criada com sucesso")
 
-        return res.json({ "status": true, "id": id })
     }
 }
