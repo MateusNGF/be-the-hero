@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link , useHistory} from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { FiPower, FiUser, FiPlusSquare, FiTrash2 } from 'react-icons/fi'
 
 import './styles.css';
@@ -13,26 +13,21 @@ import logo from '../../assets/logo.svg'
 export default function Inicio() {
     const ong_name = localStorage.getItem('ong_name')
     const ong_id = localStorage.getItem('ong_id')
-    
+
     const history = useHistory()
 
-    if (!ong_id || !ong_name) {
+    if (!ong_id  || !ong_name) {
         history.push('/');
     }
 
-    
-
     const [all_campanhas, setAllCampanha] = useState([])
-
-  
-
 
 
     useEffect(() => {
         api.get('campanhas').then(response => {
             setAllCampanha(response.data)
         })
-    })
+    }, [ong_id])
 
 
 
@@ -57,9 +52,6 @@ export default function Inicio() {
                 <div className="cabecalho">
                     <h1> Todos as campanhas : </h1>
                     <h3><strong color="#fefefe">{all_campanhas.length}</strong> campanhas precisam de ajuda.</h3>
-                </div>
-                <div className="listagem-vazia" style={(all_campanhas.length !== 0) ? { display : 'none'} : null }>
-                    <h1>DESCULPE, NÃO REGISTRAMOS NENHUMA CAMPANHA AINDA.</h1>
                 </div>
                 <ul className="listagem-casos">
                     {all_campanhas.map(campanhas => (

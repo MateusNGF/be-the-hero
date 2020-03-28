@@ -11,6 +11,10 @@ export default function Cadastro() {
 
     const history = useHistory();
 
+    if (localStorage.getItem('ong_id')){
+        history.push('/perfil')
+    }
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom'
 import { FiLogIn } from 'react-icons/fi'
 
 import './styles.css';
-import api from '../../services/api';
+import fcsOngs from '../../functions/ongs';
 
 import heroes from '../../assets/heroes.png'
 import logo from '../../assets/logo.svg'
@@ -14,19 +14,8 @@ export default function Logon() {
     const [ong_id, setOngId] = useState('')
     const [password, setPassword] = useState('')
 
-    async function logon_api(e) {
-        e.preventDefault();
-
-        try {
-            const rsp = await api.post('profile/login', { ong_id, password })
-
-            localStorage.setItem('ong_id', ong_id)
-            localStorage.setItem('ong_name', rsp.data.name)
-
-            history.push('/campanhas')
-        } catch (error) {
-            alert(" ERRO : " + error)
-        }
+    if (localStorage.getItem('ong_id')){
+        history.push('/perfil')
     }
 
 
@@ -34,7 +23,14 @@ export default function Logon() {
         <div className="logon-container">
             <section className="form">
                 <img src={logo} alt="Be the Hero" />
-                <form onSubmit={logon_api}>
+                <form onSubmit={(e) => {
+                    fcsOngs.logon(e, { ong_id, password}).then(
+                        (rsp) => {
+                            if (rsp){
+                                history.push('/perfil')
+                            }
+                        })
+                }}>
                     <h1>Fazer meu Logon</h1>
                     <input
                         placeholder="ID da ONG"

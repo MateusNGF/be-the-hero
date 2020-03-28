@@ -16,14 +16,14 @@ export default function Perfil() {
 
     const history = useHistory()
 
-    if (!ong_id || !ong_name) {
+    if (!ong_id  || !ong_name) {
         history.push('/');
     }
 
     const [ong_campanhas, setOngCampanha] = useState([])
     
     useEffect(() => {
-        api.get('profile', {
+        api.get('perfil', {
             headers: {
                 Authorization: ong_id
             }
@@ -54,9 +54,6 @@ export default function Perfil() {
                 <div className="cabecalho">
                     <h1> suas campanhas publicadas : </h1>
                     <h3><strong color="#fefefe">{ong_campanhas.length}</strong> campanhas</h3>
-                </div>
-                <div className="listagem-vazia" style={(ong_campanhas.length !== 0) ? { display : 'none'} : null }>
-                    <h1>VOCÊ AINDA NÃO FEZ NENHUMA CAMPANHA</h1>
                 </div>
 
                 <ul className="listagem-casos">

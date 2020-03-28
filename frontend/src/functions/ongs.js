@@ -11,6 +11,30 @@ const logout = () => {
     }
 }
 
+const logon = async (e, data = {}) => {
+    try {
+        e.preventDefault()
+        const rsp = await api.post('perfil/login', data)
+
+        if (rsp.data.status) {
+            alert("Acesso authorizado")
+            
+            localStorage.setItem('ong_name', rsp.data.ong_name)
+            localStorage.setItem('ong_id', data.ong_id)
+
+            return true
+        } else {
+            alert(rsp.data.error)
+            return false
+        }
+
+    } catch (erro) {
+        console.log(erro)
+        alert("Erro inesperado")
+        return false
+    }
+}
+
 const cadastro = async (e, data = {}) => {
 
     try {
@@ -47,4 +71,4 @@ const cadastro = async (e, data = {}) => {
 
 }
 
-export default { logout, cadastro }
+export default { logout, logon, cadastro }

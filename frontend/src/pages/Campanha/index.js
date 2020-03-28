@@ -13,9 +13,9 @@ export default function Campanha() {
 
     const ong_id = localStorage.getItem('ong_id')
 
-    const [campTitulo, setTitulo] = useState('')
-    const [campDescri, setDescri] = useState('')
-    const [campValue, setEmail] = useState('')
+    const [title, setTitulo] = useState('')
+    const [description, setDescri] = useState('')
+    const [value, setValue] = useState('')
 
 
     return (
@@ -32,30 +32,30 @@ export default function Campanha() {
                 </Link>
                 </section>
                 <form onSubmit={ 
-                    (e) => fcsCampanha.adicionar(ong_id, { 
-                            title : campTitulo, 
-                            description : campDescri,
-                            value : campValue 
-                         }, e).then(rsp => {
-                             console.log(rsp)
-                             if (rsp) { history.push('/perfil') }
-                         })
+                    (e) => {
+                        fcsCampanha.adicionar(e, { title, description, value }, ong_id)
+                        .then( (rsp) => {
+                            if (rsp) {
+                                history.push('/perfil')
+                            }
+                        })
+                    }
                  }>
                     <input
                         placeholder="Titulo"
-                        value={campTitulo}
+                        value={title}
                         onChange={e => setTitulo(e.target.value)}
                         required
                     />
                     <textarea
                         placeholder="Descreva oque sua campanha faz ou busca."
-                        value={campDescri}
+                        value={description}
                         onChange={e => setDescri(e.target.value)}
                     />
                     <input
                         placeholder="Valor a ser arrecadado"
-                        value={campValue}
-                        onChange={e => setEmail(e.target.value)}
+                        value={value}
+                        onChange={e => setValue(e.target.value)}
                         type="number"
                         required
                     />

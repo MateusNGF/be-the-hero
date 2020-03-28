@@ -4,37 +4,50 @@ const deletar = async (id, ong_id) => {
     try {
         var confirmed = window.confirm('Deseja deletar essa publicação ?');
         if (confirmed) {
-            await api.delete(`campanhas/${id}`, {
+           const rsp =  await api.delete(`campanhas/${id}`, {
                 headers: {
                     Authorization: ong_id
                 }
-            }).then(rsp => {
-                alert(`Sua publicação foi deletada`)
-                return true
             })
+
+            if (rsp.data.status){
+                alert("Sua campanha foi deletada")
+                return true
+            }else{
+                alert(rsp.data.error)
+                return false
+            }
         }
     } catch (erro) {
-        alert("Não foi possivel deletar")
+        alert("Erro inesperado")
+        console.log(erro)
         return false
     }
 }
 
-const adicionar = async (autho, data = {}, e) => {
+const adicionar = async (e, data ={}, authorization) => {
 
     try {
         e.preventDefault();
         var confirmed = window.confirm('Tudo certo para inserir ?');
         if (confirmed) {
-            await api.post(`campanhas`, data, {
+            const response = await api.post(`campanhas`, data, {
                 headers: {
-                    Authorization: autho
+                    Authorization: authorization
                 }
             })
-            alert(`Sua camapanha foi criada`)
-            return true
+
+            if (response.data.status){
+                alert(`Sua camapanha ${data.title} foi criada, ID ${response.data.post_id}`)
+                return true
+            }else{
+                alert(response.data.error)
+                return false
+            }
         }
     } catch (erro) {
-        alert("Não foi possivel adicionar sua campanha")
+        alert("Erro inesperado")
+        console.log(erro)
         return false
     }
 }
